@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Галерея изображений</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.min.css">
+  </head>
+  <body>
+    <header class="page-header">
+      <h1 class="page-header__title">Gallery Images</h1>
+    </header>
+    <main>
+      <section class="images">
+        <h2 class="visually-hidden">Список изображений</h2>
+        <ul class="images__list"></ul>
+      </section>
+      <section class="popup-image  popup-image--hidden">
+        <div class="popup-image__description">
+          <h2 class="visually-hidden">Модульное окно изображения</h2>
+          <div class="popup-image__wrapper-img">
+            <img class="popup-image__img" src="https://avatars.mds.yandex.net/get-pdb/33827/bee3aef3-f52e-410f-a6b4-8a53e9dc51bc/s1200" alt="Выбранное изображение">
+          </div>
+          <div class="popup-image__wrapper-comment">
+            <p class="popup-image__comment">Комментарий</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <div class="page-footer__wrapper">
+        <p class="page-footer__copyright">© 2018</p>
+      </div>
+    </footer>
+    <!-- Шаблон по которому создаются превью-картинок -->
+    <ul class="template-images-list">
+      <li class="images__item">
+        <a class="images__img" href="#">
+          <p class="images__comment">К</p>
+        </a>
+      </li>
+    </ul>
+
+    <script src="js/image-data.js"></script>
+    <script src="js/image-base.js"></script>
+    <script src="js/image-preview.js"></script>
+    <script src="js/popup-image.js"></script>
+    <script src="js/images-gallery.js"></script>
+  </body>
+</html>

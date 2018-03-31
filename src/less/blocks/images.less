@@ -1,0 +1,63 @@
+.images {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 65px;
+  padding-bottom: 10px;
+  background-color: #888888;
+  box-sizing: border-box;
+}
+
+.images__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+.images__item {
+  width: 290px;
+  min-height: 290px;
+  margin: 10px 10px;
+  background-color: #555555;
+
+  &:hover {
+    box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.images__img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #ffffff;
+  //background-image: url("https://avatars.mds.yandex.net/get-pdb/33827/bee3aef3-f52e-410f-a6b4-8a53e9dc51bc/s1200");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+/*.images__img-wrapper {
+  width: 100%;
+  height: 270px;
+}*/
+
+.images__comment {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 10px 10px;
+  background-color: #555555;
+  box-sizing: border-box;
+  box-shadow: 0 3px 7px 2px rgba(0, 0, 0, 0.3);
+}
+
+.images__item:hover .images__comment {
+  display: block;
+}

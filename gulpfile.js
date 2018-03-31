@@ -19,6 +19,7 @@ gulp.task("copy", function() {
     "src/css/**",
     "src/img/**",
     "src/js/**",
+    "src/data/**",
     "src/*.html"
   ], {
     base: "src"
