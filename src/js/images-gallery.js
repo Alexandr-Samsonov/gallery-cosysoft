@@ -2,8 +2,13 @@
 
   var container = document.querySelector('.images__list');
   var loadedImages = []; // изначальный список картинок (массив объектов)
+  var btnAddImage = document.querySelector('.page-header__add-image');
 
   getImages();
+  btnAddImage.addEventListener('click', function() {
+    var popupAddImage = document.querySelector('.popup-add-image');
+    popupAddImage.classList.remove('popup-add-image--hidden');
+  });
 
   function renderImages(imageElement) {
     // Создаем фрагмент для экономии памяти

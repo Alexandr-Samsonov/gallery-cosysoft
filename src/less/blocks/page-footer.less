@@ -6,15 +6,20 @@
 }
 
 .page-footer__wrapper {
-  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10px;
 }
 
-.page-footer__copyright {
+.page-footer__copyright,
+.page-footer__develop {
   margin: 0;
 }
 
-@media @desktop-widths {
+@media @tablet-widths {
   .page-footer__wrapper {
     .container();
+    padding: 0;
   }
 }
