@@ -26,12 +26,17 @@
     return this._data;
   };
 
+  ImagesBase.prototype.getIndex = function() {
+    return this._index;
+  }
+
   /**
   * @param {Object} data
   */
   // Данный метод записывает данные
-  ImagesBase.prototype.setData = function(data) {
+  ImagesBase.prototype.setData = function(data, index) {
     this._data = data;
+    this._index = index;
   };
 
   ImagesBase.prototype.setServerData = function(data) {
@@ -58,22 +63,19 @@
 
   ImagesBase.prototype.getServerData = function() {
     var jsonData = localStorage.getItem('data');
-    //var dataFromJson = JSON.parse(jsonData);
     if (jsonData == null || jsonData == 'undefined') {
       return 'empty';
     } else {
       var dataFromJson = JSON.parse(jsonData);
       return dataFromJson;
     }
+  };
 
-    /*if (arrNewData.length == 0) {
-      var arr = [];
-      return arr;
-    } else {
-      var jsonData = localStorage.getItem('data');
-      var dataFromJson = JSON.parse(jsonData);
-      return dataFromJson;
-    }*/
+  ImagesBase.prototype.addEditServerData = function(data, index) {
+    arrNewData[index].comment = data;
+    console.log(arrNewData);
+    var jsonData = JSON.stringify(arrNewData);
+    localStorage.setItem('data', jsonData);
   };
 
   // Прокидываем в глобальный объект

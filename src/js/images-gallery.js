@@ -39,9 +39,9 @@
     // Создаем фрагмент для экономии памяти
     var fragment = document.createDocumentFragment();
 
-    imageElement.map(function(image) {
+    imageElement.map(function(image, i) {
       var imgPreview = new ImagePreview();
-      imgPreview.setData(image);
+      imgPreview.setData(image, i);
       imgPreview.render();
       fragment.appendChild(imgPreview.element);
       
@@ -49,7 +49,7 @@
       // Аналог DOM Events Level 0 только для компонент.
       var popupImage = new ImagePopup();
       imgPreview.onClick = function() {
-        popupImage.setData(imgPreview.getData());
+        popupImage.setData(imgPreview.getData(), imgPreview.getIndex());
         popupImage.show();
       };
 
