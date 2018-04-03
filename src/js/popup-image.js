@@ -4,7 +4,6 @@
 
   function ImagePopup() {
     this.element = document.querySelector('.popup-image');
-
     // Фиксируем контекст в конструкторе
     this._onOverlayClick = this._onOverlayClick.bind(this);
     this._onEscClick = this._onEscClick.bind(this);
@@ -13,7 +12,7 @@
   ImagePopup.prototype = new ImagesBase();
 
   // Показ модульного окна картинки
-  ImagePopup.prototype.render = function() {
+  ImagePopup.prototype.show = function() {
     this.element.classList.remove('popup-image--hidden');
     bodyTag.classList.add('body-noscroll');
 
@@ -25,7 +24,7 @@
   };
 
   // Закрытие модульного окна
-  ImagePopup.prototype.remove = function() {
+  ImagePopup.prototype.close = function() {
     this.element.classList.add('popup-image--hidden');
     bodyTag.classList.remove('body-noscroll');
 
@@ -39,7 +38,7 @@
    */
   ImagePopup.prototype._onOverlayClick = function(evt) {
     if (evt.target == this.element) {
-      this.remove();
+      this.close();
     }
   };
 
@@ -49,7 +48,7 @@
    */
   ImagePopup.prototype._onEscClick = function(evt) {
     if (evt.keyCode == 27) {
-      this.remove();
+      this.close();
     }
   };
 

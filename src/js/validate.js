@@ -3,6 +3,7 @@
   'use strict';
 
   var container = document.querySelector('.images__list');
+  var bodyTag = document.querySelector('body');
   var form = document.querySelector('.popup-add-image__form');
   if (!form) return; // Если форма не найдена, то завершаем скрипт
 
@@ -128,22 +129,25 @@
     var popupImage = new ImagePopup();
     imgPreview.onClick = function() {
       popupImage.setData(imgPreview.getData());
-      popupImage.render();
+      popupImage.show();
     };
 
-    return imgPreview;
+    //return imgPreview;
   };
 
   function sendFormData(formVal) {
     console.log(formVal);
-
-    var newImage = new ImagesData(formVal);
-
-    console.log(newImage);
+    var arrFormVal = [];
+    arrFormVal.push(formVal);
+    var setNewData = new ImagesBase();
+    setNewData.addServerData(arrFormVal);
+    console.log(arrFormVal);
 
     popupImage.classList.add('popup-add-image--hidden');
     btn.disabled = false;
+    bodyTag.classList.remove('body-noscroll');
 
+    var newImage = new ImagesData(formVal);
     renderImages(newImage);
   };
 
