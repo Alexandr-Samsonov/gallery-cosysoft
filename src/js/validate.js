@@ -1,5 +1,4 @@
 (function() {
-
   'use strict';
 
   var container = document.querySelector('.images__list');
@@ -16,8 +15,7 @@
   var isError = false;
   var popupImage = document.querySelector('.popup-add-image');
 
-  // Обработчик события запускающий валидацию формы
-  btn.addEventListener('click', validForm);
+  btn.addEventListener('click', validForm); // Обработчик события запускающий валидацию формы
 
   // Определение элемента который в фокусе и если этот элемент не кнопка, то убираем выведенное
   // сообщение об ошибке. Событие onfocus можно поймать только
@@ -68,6 +66,7 @@
         }
       }
     };
+
     validate[property]();
     return error;
   };
@@ -84,6 +83,7 @@
       if (error.length != 0) {
         showError(property, error);
       }
+
       return false;
     });
   });
@@ -115,30 +115,37 @@
         controls[element.name] = element.value;
       }
     }
+
     return controls;
   };
 
   function renderImages(imageElement) {
+    var fragment = document.createDocumentFragment();
+    var index = imageElement.length - 1; // Индекс последнего объекта в массиве (нового добавленного объекта)
+    var image = imageElement.pop(); // Возвращаем последний объект массива (то есть новый добавленный объект)
+
     var imgPreview = new ImagePreview();
-    imgPreview.setData(imageElement);
+    imgPreview.setData(image, index);
     imgPreview.render();
-    container.appendChild(imgPreview.element);
-    
+    imgPreview.setRenderedElements(imgPreview);
+    fragment.appendChild(imgPreview.element);
+
     // Используем способ колбека. Использование заранее определенных в объекте функций обратного вызова.
     // Аналог DOM Events Level 0 только для компонент.
     var popupImage = new ImagePopup();
     imgPreview.onClick = function() {
-      popupImage.setData(imgPreview.getData());
+      popupImage.setData(imgPreview.getData(), imgPreview.getIndex());
       popupImage.show();
     };
 
-    //return imgPreview;
+    container.appendChild(fragment);
   };
 
   function sendFormData(formVal) {
     console.log(formVal);
     var arrFormVal = [];
     arrFormVal.push(formVal);
+
     var setNewData = new ImagesBase();
     setNewData.addServerData(arrFormVal);
     console.log(arrFormVal);
@@ -147,8 +154,14 @@
     btn.disabled = false;
     bodyTag.classList.remove('body-noscroll');
 
-    var newImage = new ImagesData(formVal);
-    renderImages(newImage);
+    var allArrFormVal = setNewData.getServerData();
+    console.log(allArrFormVal); 
+    allArrFormVal = allArrFormVal.map(function(image) {
+      return new ImagesData(image);
+    });
+
+    console.log(allArrFormVal);
+    renderImages(allArrFormVal);
   };
 
 })();

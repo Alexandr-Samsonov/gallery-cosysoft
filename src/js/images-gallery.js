@@ -12,6 +12,7 @@
     evt.preventDefault();
     popupAddImage.classList.remove('popup-add-image--hidden');
     bodyTag.classList.add('body-noscroll');
+
     window.addEventListener('click', onOverLayClick);
     window.addEventListener('keydown', onEscClick);
   });
@@ -31,18 +32,19 @@
   function closePopup() {
     popupAddImage.classList.add('popup-add-image--hidden');
     bodyTag.classList.remove('body-noscroll');
+
     window.removeEventListener('click', onOverLayClick);
     window.removeEventListener('keydown', onEscClick);
   };
 
   function renderImages(imageElement) {
-    // Создаем фрагмент для экономии памяти
-    var fragment = document.createDocumentFragment();
+    var fragment = document.createDocumentFragment(); // Создаем фрагмент для экономии памяти
 
     imageElement.map(function(image, i) {
       var imgPreview = new ImagePreview();
       imgPreview.setData(image, i);
       imgPreview.render();
+      imgPreview.setRenderedElements(imgPreview);
       fragment.appendChild(imgPreview.element);
       
       // Используем способ колбека. Использование заранее определенных в объекте функций обратного вызова.
@@ -52,8 +54,6 @@
         popupImage.setData(imgPreview.getData(), imgPreview.getIndex());
         popupImage.show();
       };
-
-      return imgPreview;
     });
     container.appendChild(fragment);
   }
@@ -73,29 +73,7 @@
     }
     
     console.log(loadedImages);
-    // Обработка загруженных данных (отрисовка)
-    renderImages(loadedImages);
-
-    /*var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'data/data-img.json');
-    xhr.onload = function(evt) {
-      var rawData = evt.target.response;
-      loadedImages = JSON.parse(rawData);
-      console.log(loadedImages);
-
-      var setData = new ImagesBase();
-      setData.setServerData(loadedImages);
-      // Перезаписываем скачанный напрямую массив объектов (список картинок)
-      // в массив объектов ImagesData у которых теперь есть свои методы (показа и записи)
-      loadedImages = loadedImages.map(function(image) {
-        return new ImagesData(image);
-      });
-      console.log(loadedImages);
-      // Обработка загруженных данных (отрисовка)
-      renderImages(loadedImages);
-    };
-
-    xhr.send();*/
+    renderImages(loadedImages); // Обработка загруженных данных (отрисовка)
   }
 
 })();

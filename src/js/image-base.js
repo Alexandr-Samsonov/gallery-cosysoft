@@ -1,9 +1,10 @@
-// Базовые типы данных, от которых наследуются конкретные типы данных.
-
 'use strict';
 
 (function() {
+
   var arrNewData = [];
+  var renderedElements = [];
+
   /**
    * @constructor
    */
@@ -11,12 +12,6 @@
 
   // Определяем свойство data на уровне прототипа объекта ImagesBase
   ImagesBase.prototype._data = null;
-
-  // Определяем базовый метод render
-  ImagesBase.prototype.render = function() {};
-
-  // Определяем базовый метод remove
-  ImagesBase.prototype.remove = function() {};
 
   /**
   * @return {Object}
@@ -26,14 +21,19 @@
     return this._data;
   };
 
+  /**
+  * @return {Object}
+  */
+  // Данный метод возвращает индекс объекта с данными
   ImagesBase.prototype.getIndex = function() {
     return this._index;
   }
 
   /**
   * @param {Object} data
+  * @param {Object} index
   */
-  // Данный метод записывает данные
+  // Данный метод записывает данные объекта и индекс этого объекта
   ImagesBase.prototype.setData = function(data, index) {
     this._data = data;
     this._index = index;
@@ -44,6 +44,10 @@
     return console.log(arrNewData);
   };
 
+  /**
+  * @param {Object} data
+  */
+  // Данный метод записывает данные в LocalStorage
   ImagesBase.prototype.addServerData = function(data) {
     var oldArrData = [];
     for (var i = 0; i < arrNewData.length; i++) {
@@ -61,6 +65,10 @@
     }
   };
 
+  /**
+  * @return {Object}
+  */
+  // Данный метод возвращает данные из LocalStorage
   ImagesBase.prototype.getServerData = function() {
     var jsonData = localStorage.getItem('data');
     if (jsonData == null || jsonData == 'undefined') {
@@ -71,11 +79,24 @@
     }
   };
 
+  /**
+  * @param {Object} data
+  * @param {Object} index
+  */
+  // Данный метод записывает измененные данные одного объекта и сохраняет в LocalStorage
   ImagesBase.prototype.addEditServerData = function(data, index) {
     arrNewData[index].comment = data;
     console.log(arrNewData);
     var jsonData = JSON.stringify(arrNewData);
     localStorage.setItem('data', jsonData);
+  };
+
+  ImagesBase.prototype.setRenderedElements = function(componentElement) {
+    renderedElements.push(componentElement);
+  };
+
+  ImagesBase.prototype.getRenderedElements = function() {
+    return renderedElements;
   };
 
   // Прокидываем в глобальный объект
