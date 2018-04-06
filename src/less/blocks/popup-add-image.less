@@ -14,16 +14,18 @@
 }
 
 .popup-add-image__description {
-  width: 500px;
+  width: 280px;
   margin: auto;
   padding: 30px 20px 20px 20px;
   background-color: #ffffff;
+  box-sizing: border-box;
 }
 
 .popup-add-image__title {
   margin: 0;
   margin-bottom: 25px;
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
@@ -63,7 +65,7 @@
 .popup-add-image__btn {
   width: 150px;
   padding: 10px 0;
-  margin-left: 175px;
+  margin-left: 45px;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
@@ -108,5 +110,20 @@
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
     border-bottom: 8px solid #f14545;
+  }
+}
+
+@media @tablet-widths {
+  .popup-add-image__description {
+    width: 500px;
+  }
+
+  .popup-add-image__title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .popup-add-image__btn {
+    margin-left: 155px;
   }
 }
